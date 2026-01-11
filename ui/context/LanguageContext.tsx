@@ -27,6 +27,7 @@ const translations: Translations = {
   'nav.logout': { pt: 'Sair', en: 'Logout' },
   'nav.theme_light': { pt: 'Modo Claro', en: 'Light Mode' },
   'nav.theme_dark': { pt: 'Modo Escuro', en: 'Dark Mode' },
+  'nav.academic_history': { pt: 'Histórico Académico', en: 'Academic History' },
 
   // Dashboard
   'dash.welcome': { pt: 'Olá', en: 'Hello' },
@@ -64,6 +65,33 @@ const translations: Translations = {
   'grades.form_submit': { pt: 'Confirmar Lançamento', en: 'Confirm Grade' },
   'grades.form_success': { pt: 'Nota lançada com sucesso!', en: 'Grade posted successfully!' },
 
+  // Classes Page
+  'classes.form_title': { pt: 'Criar Nova Turma', en: 'Create New Class' },
+  'classes.form_name': { pt: 'Nome da Turma', en: 'Class Name' },
+  'classes.form_teacher': { pt: 'Professor Responsável', en: 'Lead Teacher' },
+  'classes.form_success': { pt: 'Turma criada com sucesso!', en: 'Class created successfully!' },
+
+  // Teachers Page
+  'teachers.form_title': { pt: 'Adicionar Professor', en: 'Add Teacher' },
+  'teachers.form_contact': { pt: 'Contacto', en: 'Contact' },
+  'teachers.form_subjects': { pt: 'Disciplina(s)', en: 'Subject(s)' },
+  'teachers.form_success': { pt: 'Professor adicionado com sucesso!', en: 'Teacher added successfully!' },
+
+  // Attendance Page
+  'attendance.parent_subtitle': { pt: 'Consulte o registo de assiduidade do seu educando.', en: 'Check your child\'s attendance records.' },
+  'attendance.th_date': { pt: 'Data', en: 'Date' },
+  'attendance.th_status': { pt: 'Estado', en: 'Status' },
+  'attendance.present': { pt: 'Presente', en: 'Present' },
+  'attendance.absent': { pt: 'Ausente', en: 'Absent' },
+  'attendance.justified': { pt: 'Justificado', en: 'Justified' },
+
+  // Academic History
+  'history.title': { pt: 'Meu Percurso Académico', en: 'My Academic Journey' },
+  'history.result': { pt: 'Resultado', en: 'Result' },
+  'history.pass': { pt: 'Aprovado', en: 'Passed' },
+  'history.fail': { pt: 'Reprovado', en: 'Failed' },
+  'history.final_avg': { pt: 'Média Final', en: 'Final Average' },
+
   // Settings
   'settings.title': { pt: 'Definições da Conta', en: 'Account Settings' },
   'settings.subtitle': { pt: 'Gira as tuas preferências e informações pessoais.', en: 'Manage your personal info and preferences.' },
@@ -91,6 +119,7 @@ const translations: Translations = {
   'gen.search': { pt: 'Procurar', en: 'Search' },
   'gen.loading': { pt: 'Carregando...', en: 'Loading...' },
   'gen.error': { pt: 'Erro', en: 'Error' },
+  'gen.success': { pt: 'Sucesso', en: 'Success' },
 };
 
 interface LanguageContextType {

@@ -26,6 +26,7 @@ const sidebarLinks: SidebarLink[] = [
   { labelKey: 'nav.students', path: '/manage-students', icon: 'fa-user-graduate', roles: [UserRole.SECRETARY, UserRole.PEDAGOGICAL, UserRole.SYSTEM_ADMIN] },
   { labelKey: 'nav.teachers', path: '/manage-teachers', icon: 'fa-chalkboard-user', roles: [UserRole.PEDAGOGICAL, UserRole.SYSTEM_ADMIN] },
   { labelKey: 'nav.pedagogical', path: '/pedagogical-balance', icon: 'fa-chart-line', roles: [UserRole.TEACHER, UserRole.PEDAGOGICAL] },
+  { labelKey: 'nav.academic_history', path: '/academic-history', icon: 'fa-book-open-reader', roles: [UserRole.STUDENT] },
   { labelKey: 'nav.grades', path: '/grades', icon: 'fa-graduation-cap', roles: [UserRole.STUDENT, UserRole.TEACHER, UserRole.PARENT, UserRole.PEDAGOGICAL] },
   { labelKey: 'nav.attendance', path: '/attendance', icon: 'fa-calendar-check', roles: [UserRole.STUDENT, UserRole.TEACHER, UserRole.PEDAGOGICAL] },
   { labelKey: 'nav.my_payments', path: '/payments', icon: 'fa-credit-card', roles: [UserRole.STUDENT, UserRole.PARENT] },
