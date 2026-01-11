@@ -23,6 +23,7 @@ import ManageTeachers from './pages/ManageTeachers';
 import PedagogicalBalancePage from './pages/PedagogicalBalance';
 import UserManagement from './pages/UserManagement';
 import Settings from './pages/Settings';
+import AcademicHistory from './pages/AcademicHistory';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -113,6 +114,7 @@ const AppRoutes = () => {
       <Route path="/pedagogical-balance" element={<ProtectedRoute><PedagogicalBalancePage /></ProtectedRoute>} />
       <Route path="/user-management" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
       <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+      <Route path="/academic-history" element={<ProtectedRoute><AcademicHistory /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

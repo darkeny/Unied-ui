@@ -46,11 +46,13 @@ const Grades: React.FC = () => {
 
   const isTeacher = user?.role === UserRole.TEACHER;
   const isStudent = user?.role === UserRole.STUDENT;
+  const isParent = user?.role === UserRole.PARENT;
+  const isRestricted = isStudent || isParent;
 
   const filteredGrades = useMemo(() => {
     return grades.filter(grade => {
-      // If student, only see own grades (mock logic)
-      if (isStudent && !grade.studentName.toLowerCase().includes('joão')) return false;
+      // If student or parent, only see specific grades (mock logic uses studentName 'João')
+      if (isRestricted && !grade.studentName.toLowerCase().includes('joão')) return false;
       
       const matchYear = filters.year === 'Todos' || grade.year === filters.year;
       const matchSearch = grade.subject.toLowerCase().includes(filters.search.toLowerCase());
@@ -58,11 +60,12 @@ const Grades: React.FC = () => {
       
       return matchYear && matchSearch && matchQuarter;
     });
-  }, [filters, isStudent, grades]);
+  }, [filters, isRestricted, grades]);
 
   const handlePostGrade = (e: React.FormEvent) => {
     e.preventDefault();
-    
+    if (!isTeacher) return;
+
     // Validation
     if (!formData.subject || !formData.studentId || formData.score === '') {
       alert(t('gen.error'));
@@ -102,7 +105,7 @@ const Grades: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-slate-800 dark:text-white">{t('grades.title')}</h1>
           <p className="text-slate-500 dark:text-slate-400">
-            {isStudent ? t('grades.subtitle_student') : t('grades.subtitle_staff')}
+            {isRestricted ? t('grades.subtitle_student') : t('grades.subtitle_staff')}
           </p>
         </div>
         {isTeacher && (
@@ -178,7 +181,7 @@ const Grades: React.FC = () => {
               <tr className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
                 <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('grades.th_quarter')}</th>
                 <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('grades.th_subject')}</th>
-                {!isStudent && <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('grades.th_student')}</th>}
+                {!isRestricted && <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('grades.th_student')}</th>}
                 <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">{t('grades.th_score')}</th>
                 <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">{t('grades.th_actions')}</th>
               </tr>
@@ -192,7 +195,7 @@ const Grades: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-bold text-sm text-slate-800 dark:text-slate-200">{grade.subject}</td>
-                  {!isStudent && <td className="px-6 py-4 text-xs font-bold text-slate-700 dark:text-slate-300">{grade.studentName}</td>}
+                  {!isRestricted && <td className="px-6 py-4 text-xs font-bold text-slate-700 dark:text-slate-300">{grade.studentName}</td>}
                   <td className="px-6 py-4 text-center">
                     <span className={`inline-block w-12 py-1.5 rounded-xl font-black text-xs shadow-sm ${grade.score >= 10 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
                       {grade.score.toFixed(1)}
@@ -209,7 +212,7 @@ const Grades: React.FC = () => {
       </div>
 
       {/* Post Grade Modal */}
-      {showModal && (
+      {showModal && isTeacher && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm animate-fadeIn">
           <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-[40px] p-8 md:p-10 shadow-2xl border border-slate-100 dark:border-slate-800 animate-scaleIn overflow-y-auto max-h-[90vh] custom-scrollbar">
              <div className="flex justify-between items-center mb-8">
@@ -240,7 +243,7 @@ const Grades: React.FC = () => {
                       </select>
                    </div>
                    <div>
-                      <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-1.5">{t('grades.form_student')}</label>
+                      <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-1.5">{t('grades.th_student')}</label>
                       <select 
                         required
                         className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border-none dark:text-white font-bold text-sm outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
